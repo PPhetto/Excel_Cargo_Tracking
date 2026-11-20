@@ -4,17 +4,33 @@ const { join } = require('node:path');
 const { routeAwb, shipmentDetail } = require('./carriers.cjs');
 const { trackBatch } = require('./batch.cjs');
 
-const address = '127.0.0.1';
-const port = Number(process.env.ETK_PORT ?? '4178');
+// const address = '127.0.0.1';
+// const port = Number(process.env.ETK_PORT ?? '4178');
+// if (!Number.isInteger(port) || port < 1 || port > 65_535) {
+//   throw new Error('ETK_PORT must be an integer from 1 to 65535.');
+// }
+// const localOrigin = `http://${address}:${port}`;
+// const publicUrl = process.env.ETK_PUBLIC_ORIGIN ? new URL(process.env.ETK_PUBLIC_ORIGIN) : null;
+// if (publicUrl && (publicUrl.protocol !== 'https:' || publicUrl.pathname !== '/' ||
+//     publicUrl.username || publicUrl.password || publicUrl.search || publicUrl.hash)) {
+//   throw new Error('ETK_PUBLIC_ORIGIN must be an HTTPS origin with no path, query, or credentials.');
+// }
+
+const address = process.env.HOST ?? '0.0.0.0';
+const port = Number(process.env.PORT ?? process.env.ETK_PORT ?? '4178');
+
 if (!Number.isInteger(port) || port < 1 || port > 65_535) {
-  throw new Error('ETK_PORT must be an integer from 1 to 65535.');
+  throw new Error('PORT must be an integer from 1 to 65535.');
 }
-const localOrigin = `http://${address}:${port}`;
-const publicUrl = process.env.ETK_PUBLIC_ORIGIN ? new URL(process.env.ETK_PUBLIC_ORIGIN) : null;
-if (publicUrl && (publicUrl.protocol !== 'https:' || publicUrl.pathname !== '/' ||
-    publicUrl.username || publicUrl.password || publicUrl.search || publicUrl.hash)) {
-  throw new Error('ETK_PUBLIC_ORIGIN must be an HTTPS origin with no path, query, or credentials.');
-}
+
+const localOrigin = process.env.ETK_PUBLIC_ORIGIN
+  ? new URL(process.env.ETK_PUBLIC_ORIGIN).origin
+  : `http://127.0.0.1:${port}`;
+
+const publicUrl = process.env.ETK_PUBLIC_ORIGIN
+  ? new URL(process.env.ETK_PUBLIC_ORIGIN)
+  : null;
+
 const origin = publicUrl?.origin || localOrigin;
 const expectedHost = new URL(origin).host;
 const browser = process.env.ETK_BROWSER ?? (process.platform === 'win32' ? 'msedge' : 'chromium');
@@ -124,7 +140,11 @@ const server = createServer((request, response) => {
     else response.end();
   });
 });
+// server.listen(port, address, () => {
+//   console.log(`Excel Group Cargo Tracker is listening on ${localOrigin}`);
+//   if (publicUrl) console.log(`Configured staff URL: ${origin}`);
+// });
 server.listen(port, address, () => {
-  console.log(`Excel Group Cargo Tracker is listening on ${localOrigin}`);
+  console.log(`Excel Group Cargo Tracker is listening on ${address}:${port}`);
   if (publicUrl) console.log(`Configured staff URL: ${origin}`);
 });
