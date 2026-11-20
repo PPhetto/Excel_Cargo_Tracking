@@ -1,0 +1,119 @@
+:root { color-scheme: light; font-family: "Inter", "Segoe UI", sans-serif; color: #152539; background: #f3f6fa; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.wrap { width: min(1140px, calc(100% - 48px)); margin: 0 auto; }
+.hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: clamp(300px, 28vw, 410px);
+  overflow: hidden;
+  background-color: #edf7fe;
+  background-image: linear-gradient(90deg, #f6fbff 0%, #f6fbfff0 22%, #f6fbff99 37%, transparent 54%), url("/excel-cargo-hero-binoculars.jpg");
+  background-position: center, center 47%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hero::before, .hero-ribbon, .hero::after {
+  position: absolute;
+  inset: auto 0 0;
+  clip-path: polygon(0 40%, 12% 55%, 24% 62%, 38% 60%, 52% 53%, 67% 43%, 81% 28%, 91% 14%, 100% 0, 100% 100%, 0 100%);
+  content: "";
+}
+.hero::before { height: 29px; background: #d51e2b; }
+.hero-ribbon { height: 22px; background: white; }
+.hero::after { height: 18px; background: #093466; }
+.hero-content { padding-block: 26px 46px; }
+.hero-logo {
+  display: block;
+  width: clamp(174px, 21vw, 268px);
+  height: auto;
+  margin-left: -3px;
+  margin-bottom: 12px;
+  mix-blend-mode: multiply;
+  mask-image: linear-gradient(90deg, transparent, #000 4% 96%, transparent),
+    linear-gradient(transparent, #000 18% 87%, transparent);
+  mask-composite: intersect;
+}
+h1 {
+  margin: 0;
+  max-width: max-content;
+  color: #0e2b51;
+  font-size: clamp(3rem, 5.8vw, 5.5rem);
+  font-weight: 800;
+  line-height: .99;
+  letter-spacing: -.057em;
+}
+.hero h1 span { display: block; color: #16559a; }
+.airline-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px clamp(12px, 2.2vw, 28px) 8px max(24px, calc((100% - 1140px) / 2));
+  background: #e9f2fc;
+  border-bottom: 1px solid #d5e3f1;
+}
+.airline-release {
+  color: #264a71;
+  font-size: .6875rem;
+  font-weight: 650;
+  line-height: 1.35;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.airline-release p { margin: 0; color: inherit; }
+.airline-row .airline-list {
+  margin: 0;
+  color: #264a71;
+  font-size: .875rem;
+  line-height: 1.35;
+}
+.airline-row strong { margin-right: .35em; color: #0e2b51; }
+main { padding: 28px 0 34px; }
+@media (max-width: 620px) {
+  .hero {
+    min-height: 354px;
+    align-items: start;
+    background-image: linear-gradient(180deg, #f6fbff 0% 42%, #f6fbffbf 47%, transparent 59%), url("/excel-cargo-hero-binoculars.jpg");
+    background-position: center, right bottom 3px;
+    background-size: cover, auto 208px;
+  }
+  .hero-content { padding-block: 24px 0; }
+  .hero-logo { margin-bottom: 7px; }
+  .hero h1 { font-size: clamp(2.55rem, 9vw, 3.5rem); }
+  .hero::before { height: 18px; }
+  .hero-ribbon { height: 13px; }
+  .hero::after { height: 10px; }
+  main { padding-top: 20px; }
+}
+form, .table-wrap { background: white; border: 1px solid #d5deea; border-radius: 10px; }
+form { padding: 23px; margin-bottom: 24px; }
+label { font-weight: 700; }
+p { margin: 6px 0 13px; color: #526577; }
+textarea { width: 100%; display: block; padding: 12px; border: 1px solid #9caec2; border-radius: 5px; resize: vertical; font: .95rem/1.6 "IBM Plex Mono", Consolas, monospace; color: inherit; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 13px; margin-top: 15px; }
+button { border: 0; border-radius: 5px; font: inherit; font-weight: 700; background: #16559a; color: white; padding: 10px 17px; cursor: pointer; }
+button:disabled { opacity: .6; cursor: wait; }
+button:focus-visible, textarea:focus-visible, .shipment-detail-link:focus-visible { outline: 3px solid #3d8dd3; outline-offset: 2px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; font-size: .91rem; }
+th, td { padding: 13px 12px; border-bottom: 1px solid #e1e8f1; vertical-align: top; }
+thead { background: #e8f0f8; }
+thead th { white-space: nowrap; }
+tbody td:nth-child(2) { min-width: 10rem; overflow-wrap: anywhere; }
+tbody tr:last-child td { border-bottom: 0; }
+.detail { display: block; margin-top: 4px; color: #526577; line-height: 1.45; }
+.shipment-detail-link { color: #16559a; font-weight: 700; }
+.shipment-detail-number { white-space: nowrap; }
+.quick-image-link { display: block; padding: 0; margin-top: 5px; background: none; color: #16559a; text-decoration: underline; text-align: left; }
+.quick-image-dialog { width: min(1060px, calc(100% - 24px)); max-height: 92vh; padding: 0; border: 1px solid #d5deea; border-radius: 10px; color: inherit; }
+.quick-image-dialog::backdrop { background: rgb(9 29 52 / 60%); }
+.quick-image-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px; background: white; }
+.quick-image-header h2 { margin: 0; font-size: 1.1rem; }
+.quick-image-header p { margin: 4px 0 0; font-size: .875rem; }
+.quick-image-header form { margin: 0; padding: 0; border: 0; }
+.quick-image-view { overflow: auto; max-height: 75vh; padding: 12px; border-top: 1px solid #d5deea; }
+.quick-image-view img { display: block; max-width: 100%; height: auto; margin-inline: auto; }
+.failed, .cancelled { color: #963927; font-weight: 700; }
+.note { font-size: .84rem; }

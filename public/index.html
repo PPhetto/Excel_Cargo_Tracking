@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Excel Group Cargo Tracker</title>
+  <link rel="stylesheet" href="/dashboard.css">
+  <script src="/dashboard.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-content">
+      <img class="hero-logo" src="/excel-logo.png" alt="Excel Transport International Co., Ltd." width="532" height="157">
+      <h1>Excellent <span>tracking</span></h1>
+    </div>
+    <span class="hero-ribbon" aria-hidden="true"></span>
+  </header>
+  <div class="airline-row">
+    <p class="airline-list"><strong>Airline :</strong> TG, SQ, KE, QR, AY, AI, TK, EK, JL, CI, NH</p>
+    <div class="airline-release">
+      <p>version ETK 2.1 - <time datetime="2026-11-18">18/11/2026</time></p>
+      <p>created by Aswin</p>
+    </div>
+  </div>
+  <main class="wrap">
+    <form id="track">
+      <label for="shipments">Shipment list</label>
+      <p id="list-help">Enter one AWB per line, followed by the shipper name if you have it. You can also paste AWB and Shipper columns from Excel.</p>
+      <textarea id="shipments" aria-describedby="list-help" rows="5" spellcheck="false" placeholder="180-XXXXXXXX    Shipper name" required></textarea>
+      <div class="actions">
+        <button>Track all</button>
+        <span id="progress" role="status"></span>
+      </div>
+    </form>
+    <section id="results" aria-label="Tracking results" hidden>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>AWB</th><th>Shipper</th><th>Destination</th><th>Latest carrier status</th><th>Event time</th><th>Cargo detail</th><th>Pieces by flight</th><th>Shipment detail</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="note">Event times are shown as published by each airline.</p>
+    </section>
+  </main>
+  <dialog id="quick-image" class="quick-image-dialog" aria-labelledby="quick-image-title">
+    <div class="quick-image-header">
+      <div>
+        <h2 id="quick-image-title"></h2>
+        <p id="quick-image-time"></p>
+      </div>
+      <form method="dialog"><button autofocus>Close</button></form>
+    </div>
+    <div class="quick-image-view"><img alt="Captured shipment details"></div>
+  </dialog>
+</body>
+</html>

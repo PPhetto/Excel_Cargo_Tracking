@@ -1,0 +1,17 @@
+{
+  "name": "excel-group-cargo-tracker",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Local air cargo tracking dashboard for Excel Group",
+  "scripts": {
+    "start": "node src/dashboard.cjs",
+    "track": "node src/track.cjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright": "1.62.1"
+  }
+}
